@@ -5,6 +5,7 @@ import com.example.taskproject.service.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -26,6 +27,7 @@ public class TaskController {
                 HttpStatus.CREATED);
     }
     //get the task
+    @PreAuthorize(value = "ROLE_USER")
     @GetMapping("/{userId}/tasks")
     public ResponseEntity<List<TaskDTO>> getAllTask(
             @PathVariable(name="userId") long userId){
@@ -44,6 +46,7 @@ public class TaskController {
             HttpStatus.OK);
     }
     // delete individual task
+    @PreAuthorize(value = "ROLE_ADMIN")
     @DeleteMapping("/{userId}/tasks/{taskId}")
     public ResponseEntity<String> deleteTask(
             @PathVariable(name = "userId")long userId,
