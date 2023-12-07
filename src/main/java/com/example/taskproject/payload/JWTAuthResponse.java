@@ -7,7 +7,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class JWTAuthResponse {
     private String token;
-    private String tokenType="Bearer";
+    private final String tokenType="Bearer";
 
     public JWTAuthResponse(String token){
         this.token = token;

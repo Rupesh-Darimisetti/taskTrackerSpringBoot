@@ -42,10 +42,7 @@ public class AuthController {
                         )
                 );
         SecurityContextHolder.getContext().setAuthentication(authentication);
-//        System.out.println(authentication);
         String token = jwtTokenProvider.generateToken(authentication); //get the token
-//        System.out.println(token);
-//        return new ResponseEntity<>("user login successful",HttpStatus.OK);
     return ResponseEntity.ok(new JWTAuthResponse(token));
     }
 }

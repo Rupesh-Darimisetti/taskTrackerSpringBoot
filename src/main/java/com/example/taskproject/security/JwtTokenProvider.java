@@ -1,5 +1,6 @@
 package com.example.taskproject.security;
 
+import com.example.taskproject.exception.APIException;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -28,5 +29,15 @@ public class JwtTokenProvider {
                 .parseClaimsJws(token).getBody();
 
         return claims.getSubject();
+    }
+
+    public boolean validateToken(String token){
+        try{
+            Jwts.parser().setSigningKey("JWTSecretKey")
+                    .parseClaimsJws(token);
+            return true;
+        }catch (Exception e){
+            throw new APIException("token issue: "+ e.getMessage());
+        }
     }
 }
